@@ -7,6 +7,8 @@ function Card(value, suit) {
     this.suit = suit;
 }
 
+//how do I access this function from a Deck object?
+//  myDeck.stack[x].announce() does not work.
 Card.prototype.announce = function() {
     return this.value + " of " + this.suit;
 }
@@ -34,7 +36,11 @@ Deck.prototype.randomCard = function() {
     return this.stack[Math.floor(Math.random() * 52)];
 }
 
-
+Deck.prototype.cutDeck = function() {
+    //cut the deck at a random spot close to the middle (+/- 4 cards)
+    let cutIndex = Math.floor(Math.random() * 8) + 24;
+    this.stack = this.stack(cutIndex,51) + this.stack(0, cutIndex - 1);
+}
 
 
 /*
@@ -46,7 +52,9 @@ for (var n = 0; n < 10;n++) {
 var redDeck = new Deck();
 
 redDeck.makeStack();
+console.table(redDeck);
+//redDeck.cutDeck();
+console.table(redDeck);
 
-console.log(redDeck.randomCard());
 
-//console.log(deck2[5].announce); 
+//console.log(redDeck.randomCard());
