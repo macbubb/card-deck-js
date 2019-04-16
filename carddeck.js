@@ -1,5 +1,6 @@
-function Deck() {
+function Deck(color) {
     this.stack = [];
+    this.color = color;
 }
 
 function Card(value, suit) {
@@ -32,6 +33,10 @@ Deck.prototype.makeStack = function() {
     }
 }
 
+Deck.prototype.deckStats = function() {
+    return this.stack.length + " card " + this.color + " Deck";
+}
+
 Deck.prototype.randomCard = function() {
     return this.stack[Math.floor(Math.random() * 52)];
 }
@@ -43,9 +48,10 @@ Deck.prototype.cutDeck = function() {
     this.stack = this.stack.slice(cutIndex, 52).concat(this.stack.slice(0, cutIndex));
 }
 
-var redDeck = new Deck();
+var redDeck = new Deck('Red');
 
 redDeck.makeStack();
 console.table(redDeck.stack);
 redDeck.cutDeck();
 console.table(redDeck.stack);
+console.log(redDeck.deckStats());
