@@ -25,15 +25,15 @@ Deck.prototype.makeStack = function() {
 
         for (let i = 0; i < 4; i++) {
             for (let j = 2; j < 11; j++) {
-                this.stack.push([j,suits[i]]);
+                this.stack.push(new Card(j,suits[i]));
             }
             for (let n = 0; n < 4; n++) {
-                this.stack.push([faceCards[n],suits[i]]);
+                this.stack.push(new Card(faceCards[n],suits[i]));
             }
         }
         if (this.hasJokers) {
-            this.stack.push(["Joker", "Black"]);
-            this.stack.push(["Joker", "Red"]);
+            this.stack.push(new Card("Joker", "Black"));
+            this.stack.push(new Card("Joker", "Red"));
         }
     }
 }
@@ -51,11 +51,13 @@ Deck.prototype.cutDeck = function() {
     let cutIndex = Math.floor(Math.random() * 8) + this.stack.length / 2 - 4;
     console.log("Cutting deck at " + cutIndex);
 
-    this.stack = this.stack.slice(cutIndex, 52).concat(this.stack.slice(0, cutIndex));
+    this.stack = this.stack.slice(cutIndex, this.stack.length).concat(this.stack.slice(0, cutIndex));
 }
 
 var redDeck = new Deck('Red', true);
 
 redDeck.makeStack();
+redDeck.cutDeck();
+
 
 console.table(redDeck.stack);
