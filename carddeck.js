@@ -1,6 +1,7 @@
-function Deck(color) {
+function Deck(color, hasJokers) {
     this.stack = [];
     this.color = color;
+    this.hasJokers = hasJokers;
 }
 
 function Card(value, suit) {
@@ -30,6 +31,10 @@ Deck.prototype.makeStack = function() {
                 this.stack.push([faceCards[n],suits[i]]);
             }
         }
+        if (this.hasJokers) {
+            this.stack.push(["Joker", "Black"]);
+            this.stack.push(["Joker", "Red"]);
+        }
     }
 }
 
@@ -49,12 +54,8 @@ Deck.prototype.cutDeck = function() {
     this.stack = this.stack.slice(cutIndex, 52).concat(this.stack.slice(0, cutIndex));
 }
 
-var redDeck = new Deck('Red');
+var redDeck = new Deck('Red', true);
 
 redDeck.makeStack();
-//console.table(redDeck.stack);
-for (let i = 0; i < 10; i++) {redDeck.cutDeck();}
 
-//console.table(redDeck.stack);
-//console.log(redDeck.deckStats());
-//console.log(redDeck.randomCard());
+console.table(redDeck.stack);
