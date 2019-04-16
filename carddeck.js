@@ -39,22 +39,13 @@ Deck.prototype.randomCard = function() {
 Deck.prototype.cutDeck = function() {
     //cut the deck at a random spot close to the middle (+/- 4 cards)
     let cutIndex = Math.floor(Math.random() * 8) + 24;
-    this.stack = this.stack(cutIndex,51) + this.stack(0, cutIndex - 1);
-}
 
-
-/*
-for (var n = 0; n < 10;n++) {
-   console.log(randomCard());
+    this.stack = this.stack.slice(cutIndex, 52).concat(this.stack.slice(0, cutIndex));
 }
-*/
 
 var redDeck = new Deck();
 
 redDeck.makeStack();
-console.table(redDeck);
-//redDeck.cutDeck();
-console.table(redDeck);
-
-
-//console.log(redDeck.randomCard());
+console.table(redDeck.stack);
+redDeck.cutDeck();
+console.table(redDeck.stack);
