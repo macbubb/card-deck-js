@@ -4,13 +4,12 @@ function Deck(color, hasJokers) {
     this.hasJokers = hasJokers;
 }
 
-function Card(value, suit) {
+function Card(value, suit, shuffleIndex) {
     this.value = value;
     this.suit = suit;
+    this.shuffleIndex = shuffleIndex;
 }
 
-//how do I access this function from a Deck object?
-//  myDeck.stack[x].announce() does not work.
 Card.prototype.announce = function() {
     return this.value + " of " + this.suit;
 }
@@ -54,12 +53,32 @@ Deck.prototype.cutDeck = function() {
     this.stack = this.stack.slice(cutIndex, this.stack.length).concat(this.stack.slice(0, cutIndex));
 }
 
+Deck.prototype.newShuffleIndex = function() {
+    this.stack.forEach( card => card.shuffleIndex = Math.floor(Math.random()*10000));
+}
+
+Deck.prototype.sortShuffleIndex = function() {
+    this.stack.sort( (card1, card2) => card1.shuffleIndex - card2.shuffleIndex);
+}
+
+Deck.prototype.shuffleDeck = function(shuffles) {
+    for (let i = 0; i < shuffles; i++) {
+        this.newShuffleIndex();
+        this.cutDeck();
+        this.sortShuffleIndex();
+    }
+}
+
+//shuffle method ideas
+// 1 add a random shuffle index for each card, shuffle method will generate index then sort
+// 2 use splice to randomly remove cards from stack and push into a shuffled returned stack
+
 var redDeck = new Deck('Red', true);
 
 redDeck.makeStack();
-redDeck.cutDeck();
-
 
 console.table(redDeck.stack);
 
-console.log(redDeck.stack[0].announce());
+redDeck.shuffleDeck(10);
+
+console.table(redDeck.stack);
