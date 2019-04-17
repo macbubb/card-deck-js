@@ -61,3 +61,5 @@ redDeck.cutDeck();
 
 
 console.table(redDeck.stack);
+
+console.log(redDeck.stack[0].announce());
