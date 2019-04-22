@@ -48,8 +48,6 @@ Deck.prototype.randomCard = function() {
 Deck.prototype.cutDeck = function() {
     //cut the deck at a random spot close to the middle (+/- 4 cards)
     let cutIndex = Math.floor(Math.random() * 8) + this.stack.length / 2 - 4;
-    console.log("Cutting deck at " + cutIndex);
-
     this.stack = this.stack.slice(cutIndex, this.stack.length).concat(this.stack.slice(0, cutIndex));
 }
 
@@ -79,6 +77,6 @@ redDeck.makeStack();
 
 console.table(redDeck.stack);
 
-redDeck.shuffleDeck(10);
+redDeck.shuffleDeck(100);
 
 console.table(redDeck.stack);
