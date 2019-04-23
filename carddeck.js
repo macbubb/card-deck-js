@@ -15,6 +15,10 @@ function Hand(playerName) {
     this.handStack = [];
 }
 
+Hand.prototype.takeCard = function(card) {
+    this.handStack.push(card);
+}
+
 Card.prototype.announce = function() {
     return this.value + " of " + this.suit;
 }
@@ -42,9 +46,14 @@ Deck.prototype.makeStack = function() {
     }
 }
 
-//arguments: players
-Deck.prototype.deal = function(...args) {
-    console.log(args.length);
+//arguments: number of cards per player, ...players
+Deck.prototype.deal = function(cardsPerHand, ...args) {
+    console.log("Dealing to " + args.length + " players.");
+    for (let i = 0; i <+ cardsPerHand; i++) {
+        for (let j = 0; j < args.length; j++) {
+            args[j].takeCard(this.stack.pop(this.stack.length));
+        }
+    }
 }
 
 Deck.prototype.deckStats = function() {
@@ -91,3 +100,8 @@ var Mac = new Hand("Mac");
 var Jude = new Hand("Jude");
 var Ezra = new Hand("Ezra");
 var Laura = new Hand("Laura");
+
+redDeck.deal(13, Mac, Jude, Ezra, Laura);
+
+console.table(Jude.handStack);
+console.table(redDeck.stack);
