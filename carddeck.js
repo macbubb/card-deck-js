@@ -19,6 +19,12 @@ Hand.prototype.takeCard = function(card) {
     this.handStack.push(card);
 }
 
+Hand.prototype.announceHand = function() {
+    console.log(this.playerName + "'s hand has " + this.handStack.length + " cards.");
+    console.table(this.handStack);
+}
+
+
 Card.prototype.announce = function() {
     return this.value + " of " + this.suit;
 }
@@ -48,11 +54,15 @@ Deck.prototype.makeStack = function() {
 
 //arguments: number of cards per player, ...players
 Deck.prototype.deal = function(cardsPerHand, ...args) {
-    console.log("Dealing to " + args.length + " players.");
-    for (let i = 0; i <+ cardsPerHand; i++) {
-        for (let j = 0; j < args.length; j++) {
-            args[j].takeCard(this.stack.pop(this.stack.length));
+    if (cardsPerHand <= this.stack.length / args.length) {
+        console.log("Dealing to " + args.length + " players.");
+        for (let i = 0; i <+ cardsPerHand; i++) {
+            for (let j = 0; j < args.length; j++) {
+                args[j].takeCard(this.stack.pop(this.stack.length));
+            }
         }
+    } else {
+        console.log("Not enough cards in deck for each player to receive the request hand size.");
     }
 }
 
@@ -101,7 +111,7 @@ var Jude = new Hand("Jude");
 var Ezra = new Hand("Ezra");
 var Laura = new Hand("Laura");
 
-redDeck.deal(13, Mac, Jude, Ezra, Laura);
+redDeck.deal(14, Mac, Jude, Ezra, Laura);
 
-console.table(Jude.handStack);
+Jude.announceHand();
 console.table(redDeck.stack);
