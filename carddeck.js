@@ -10,6 +10,11 @@ function Card(value, suit, shuffleIndex) {
     this.shuffleIndex = shuffleIndex;
 }
 
+function Hand(playerName) {
+    this.playerName = playerName;
+    this.handStack = [];
+}
+
 Card.prototype.announce = function() {
     return this.value + " of " + this.suit;
 }
@@ -31,10 +36,15 @@ Deck.prototype.makeStack = function() {
             }
         }
         if (this.hasJokers) {
-            this.stack.push(new Card("Joker", "Black"));
+            this.stack.push(new Card("Joker", "Black")); 
             this.stack.push(new Card("Joker", "Red"));
         }
     }
+}
+
+//arguments: players
+Deck.prototype.deal = function(...args) {
+    console.log(args.length);
 }
 
 Deck.prototype.deckStats = function() {
@@ -67,16 +77,17 @@ Deck.prototype.shuffleDeck = function(shuffles) {
     }
 }
 
-//shuffle method ideas
-// 1 add a random shuffle index for each card, shuffle method will generate index then sort
-// 2 use splice to randomly remove cards from stack and push into a shuffled returned stack
-
 var redDeck = new Deck('Red', true);
 
 redDeck.makeStack();
 
-console.table(redDeck.stack);
+//console.table(redDeck.stack);
 
 redDeck.shuffleDeck(100);
 
-console.table(redDeck.stack);
+//console.table(redDeck.stack);
+
+var Mac = new Hand("Mac");
+var Jude = new Hand("Jude");
+var Ezra = new Hand("Ezra");
+var Laura = new Hand("Laura");
