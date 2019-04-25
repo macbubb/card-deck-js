@@ -1,13 +1,11 @@
-function Deck(color, hasJokers) {
-    this.stack = [];
-    this.color = color;
-    this.hasJokers = hasJokers;
-}
-
 function Card(value, suit, shuffleIndex) {
     this.value = value;
     this.suit = suit;
     this.shuffleIndex = shuffleIndex;
+}
+
+Card.prototype.announce = function() {
+    return this.value + " of " + this.suit;
 }
 
 function Hand(playerName) {
@@ -24,11 +22,11 @@ Hand.prototype.announceHand = function() {
     console.table(this.handStack);
 }
 
-
-Card.prototype.announce = function() {
-    return this.value + " of " + this.suit;
+function Deck(color, hasJokers) {
+    this.stack = [];
+    this.color = color;
+    this.hasJokers = hasJokers;
 }
-
 //this seems like it should be considered the constructor, but in JS the constructor seems limited to just assigning variables names / values from arguments
 Deck.prototype.makeStack = function() {
     if (this.stack.length === 0) {
@@ -62,7 +60,7 @@ Deck.prototype.deal = function(cardsPerHand, ...args) {
             }
         }
     } else {
-        console.log("Not enough cards in deck for each player to receive the request hand size.");
+        console.log("Not enough cards in deck for each player to receive the requested hand size.");
     }
 }
 
@@ -96,6 +94,7 @@ Deck.prototype.shuffleDeck = function(shuffles) {
     }
 }
 
+
 var redDeck = new Deck('Red', true);
 
 redDeck.makeStack();
@@ -111,7 +110,7 @@ var Jude = new Hand("Jude");
 var Ezra = new Hand("Ezra");
 var Laura = new Hand("Laura");
 
-redDeck.deal(14, Mac, Jude, Ezra, Laura);
+redDeck.deal(4, Mac, Jude, Ezra, Laura);
 
 Jude.announceHand();
 console.table(redDeck.stack);
