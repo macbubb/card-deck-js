@@ -13,13 +13,13 @@ function Hand(playerName) {
     this.handStack = [];
 }
 
-Hand.prototype.takeCard = function(card) {
+Hand.prototype.drawCard = function(card) {
     this.handStack.push(card);
 }
 
 Hand.prototype.announceHand = function() {
     console.log(this.playerName + "'s hand has " + this.handStack.length + " cards.");
-    console.table(this.handStack);
+    console.table(this.handStack, ["value", "suit"]);
 }
 
 function Deck(color, hasJokers) {
@@ -56,7 +56,7 @@ Deck.prototype.deal = function(cardsPerHand, ...args) {
         console.log("Dealing to " + args.length + " players.");
         for (let i = 0; i <+ cardsPerHand; i++) {
             for (let j = 0; j < args.length; j++) {
-                args[j].takeCard(this.stack.pop(this.stack.length));
+                args[j].drawCard(this.stack.pop(this.stack.length));
             }
         }
     } else {
@@ -104,8 +104,7 @@ function Table(gameName, deck, ...args) {
 Table.prototype.describeTable = function() {
     console.log(this.players.length + " players are at the table to play the game " + this.gameName + ".");
     for (let i = 0; i < this.players.length; i++) {
-        console.log(this.players[i].playerName + " is holding,");
-        console.table(this.players[i].handStack);
+        this.players[i].announceHand();
     }
     console.log("The deck contains,");
     console.table(this.deck.stack);
