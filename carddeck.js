@@ -94,6 +94,22 @@ Deck.prototype.shuffleDeck = function(shuffles) {
     }
 }
 
+//name of game and players
+function Table(gameName, deck, ...args) {
+    this.gameName = gameName;
+    this.deck = deck;
+    this.players = [...args];
+}
+
+Table.prototype.describeTable = function() {
+    console.log(this.players.length + " players are at the table to play the game " + this.gameName + ".");
+    for (let i = 0; i < this.players.length; i++) {
+        console.log(this.players[i].playerName + " is holding,");
+        console.table(this.players[i].handStack);
+    }
+    console.log("The deck contains,");
+    console.table(this.deck.stack);
+}
 
 var redDeck = new Deck('Red', true);
 
@@ -110,7 +126,8 @@ var Jude = new Hand("Jude");
 var Ezra = new Hand("Ezra");
 var Laura = new Hand("Laura");
 
-redDeck.deal(4, Mac, Jude, Ezra, Laura);
+redDeck.deal(8, Mac, Jude, Ezra, Laura);
 
-Jude.announceHand();
-console.table(redDeck.stack);
+var Golf = new Table("golf", redDeck, Mac, Jude, Ezra, Laura);
+
+Golf.describeTable();
