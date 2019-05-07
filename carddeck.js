@@ -69,6 +69,18 @@ Deck.prototype.shuffleDeck = function(shuffles) {
     }
 }
 
+
+//what arguments do i really need???
+function DiscardPile(){
+    this.pile = pile;
+}
+
+
+//what method will call this??
+DiscardPile.prototype.AddCard = function(card) {
+    this.pile.push(card);
+}
+
 //shuffle method ideas
 // 1 add a random shuffle index for each card, shuffle method will generate index then sort
 // 2 use splice to randomly remove cards from stack and push into a shuffled returned stack
