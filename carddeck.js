@@ -69,17 +69,10 @@ Deck.prototype.shuffleDeck = function(shuffles) {
     }
 }
 
-
+//discard object / method
 //what arguments do i really need???
-function DiscardPile(){
-    this.pile = pile;
-}
-
-
-//what method will call this??
-DiscardPile.prototype.AddCard = function(card) {
-    this.pile.push(card);
-}
+//new plan, make discard stack a property of deck object discarding card will be a
+//method from hand or deck, one willl have the method and the other will be an arg
 
 //shuffle method ideas
 // 1 add a random shuffle index for each card, shuffle method will generate index then sort
