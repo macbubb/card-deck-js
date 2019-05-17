@@ -156,7 +156,7 @@ var Ezra = new Hand("Ezra");
 var Laura = new Hand("Laura");
 
 var toot = new Card(6, "Hearts");
-toot.displayCard(200, 100, 3);
+toot.displayCard(200, 100, 2);
 
 redDeck.deal(8, Mac, Jude, Ezra, Laura);
 
