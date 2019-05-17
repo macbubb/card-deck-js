@@ -123,12 +123,20 @@ Card.prototype.displayCard = function(x, y, scale) {
     if (canvas.getContext) {
         var ctx = canvas.getContext('2d');
 
+        // outlines card
+        let borderR = 6; //border radius
+        let controlO = .5; //distance from true corner to control point control offset?
         ctx.beginPath();
-        ctx.moveTo((x - 2) * scale, y * scale);
-        ctx.lineTo((x - 60) * scale, y * scale);
-        ctx.quadraticCurveTo((x - 64) * scale, y * scale, (x - 64) * scale, (y - 2) * scale);
-        ctx.lineTo((x - 64) * scale, (y - 60) * scale);
-        ctx.stroke();
+        ctx.moveTo((x - borderR) * scale, y * scale); // start at right side of bottom edge
+        ctx.lineTo((x - 64 + borderR) * scale, y * scale); // bottom side
+        ctx.quadraticCurveTo((x - 64 + controlO) * scale, (y - controlO) * scale, (x - 64) * scale, (y - borderR) * scale); // bottom left corner
+        ctx.lineTo((x - 64) * scale, (y - 89 + borderR) * scale); // left side
+        ctx.quadraticCurveTo((x - 64 + controlO) * scale, (y - 89 + controlO) * scale, (x - 64 + borderR) * scale, (y - 89) * scale); // top left corner
+        ctx.lineTo((x - borderR) * scale, (y - 89) * scale); //top side
+        ctx.quadraticCurveTo((x - controlO) * scale, (y - 89 + controlO) * scale, x * scale, (y - 89 + borderR) * scale); // top right corner
+        ctx.lineTo(x * scale, (y - borderR) * scale ); // right side
+        ctx.quadraticCurveTo((x - controlO) * scale, (y - controlO) * scale, (x - borderR) * scale, y * scale); // bottom right corner
+        ctx.stroke(); 
     }
 }
 
@@ -148,7 +156,7 @@ var Ezra = new Hand("Ezra");
 var Laura = new Hand("Laura");
 
 var toot = new Card(6, "Hearts");
-toot.displayCard(200, 100, .1);
+toot.displayCard(200, 100, 3);
 
 redDeck.deal(8, Mac, Jude, Ezra, Laura);
 
