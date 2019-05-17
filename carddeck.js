@@ -110,6 +110,28 @@ Table.prototype.describeTable = function() {
     console.table(this.deck.stack);
 }
 
+function startGame() {
+    var canvas = document.getElementById('canvas');
+    if (canvas.getContext) {
+   }
+}
+
+//standard playing card is 64mm x 89mm
+
+//arguments are coordinates of bottom right corner of card, scale of card
+Card.prototype.displayCard = function(x, y, scale) {
+    if (canvas.getContext) {
+        var ctx = canvas.getContext('2d');
+
+        ctx.beginPath();
+        ctx.moveTo((x - 2) * scale, y * scale);
+        ctx.lineTo((x - 60) * scale, y * scale);
+        ctx.quadraticCurveTo((x - 64) * scale, y * scale, (x - 64) * scale, (y - 2) * scale);
+        ctx.lineTo((x - 64) * scale, (y - 60) * scale);
+        ctx.stroke();
+    }
+}
+
 var redDeck = new Deck('Red', true);
 
 redDeck.makeStack();
@@ -124,6 +146,9 @@ var Mac = new Hand("Mac");
 var Jude = new Hand("Jude");
 var Ezra = new Hand("Ezra");
 var Laura = new Hand("Laura");
+
+var toot = new Card(6, "Hearts");
+toot.displayCard(200, 100, .1);
 
 redDeck.deal(8, Mac, Jude, Ezra, Laura);
 
