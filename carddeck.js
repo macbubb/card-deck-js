@@ -136,7 +136,23 @@ Card.prototype.displayCard = function(x, y, scale) {
         ctx.quadraticCurveTo((x - controlO) * scale, (y - 89 + controlO) * scale, x * scale, (y - 89 + borderR) * scale); // top right corner
         ctx.lineTo(x * scale, (y - borderR) * scale ); // right side
         ctx.quadraticCurveTo((x - controlO) * scale, (y - controlO) * scale, (x - borderR) * scale, y * scale); // bottom right corner
-        ctx.stroke(); 
+        ctx.stroke();
+        }
+}
+
+// x and y are coordinates of top middle of suit shape
+Card.prototype.drawDiamond = function(x, y, scale) {
+    if (canvas.getContext) {
+        var ctx = canvas.getContext('2d');
+        let suitW = 10;
+        let suitH = 15;
+        ctx.beginPath();
+        ctx.moveTo((x  * scale), (y * scale)); //top middle??
+        ctx.lineTo((x - (suitW / 2)) * scale, (y + (suitH / 2)) * scale);
+        ctx.lineTo(x  * scale, (y + suitH) * scale);
+        ctx.lineTo((x + (suitW / 2)) * scale, (y + (suitH / 2))* scale);
+        ctx.lineTo((x * scale), (y * scale));
+        ctx.stroke();
     }
 }
 
@@ -156,6 +172,7 @@ var Ezra = new Hand("Ezra");
 var Laura = new Hand("Laura");
 
 var toot = new Card(6, "Hearts");
+<<<<<<< HEAD
 toot.displayCard(75, 100, 2);
 toot.displayCard(150, 100, 2);
 toot.displayCard(225, 100, 2);
@@ -166,6 +183,10 @@ toot.displayCard(75, 300, 2);
 toot.displayCard(150, 300, 2);
 toot.displayCard(225, 300, 2);
 
+=======
+//toot.displayCard(200, 100, 2);
+toot.drawDiamond(30, 30, 4);
+>>>>>>> 51d5c6c27d882999d6e2882c79d1c5eaeb5634af
 
 
 redDeck.deal(8, Mac, Jude, Ezra, Laura);
