@@ -124,7 +124,7 @@ Card.prototype.displayCard = function(x, y, scale) {
         var ctx = canvas.getContext('2d');
 
         // outlines card
-        let borderR = 6; //border radius
+        let borderR = 5; //border radius
         let controlO = .5; //distance from true corner to control point control offset?
         ctx.beginPath();
         ctx.moveTo((x - borderR) * scale, y * scale); // start at right side of bottom edge
@@ -156,7 +156,17 @@ var Ezra = new Hand("Ezra");
 var Laura = new Hand("Laura");
 
 var toot = new Card(6, "Hearts");
-toot.displayCard(200, 100, 2);
+toot.displayCard(75, 100, 2);
+toot.displayCard(150, 100, 2);
+toot.displayCard(225, 100, 2);
+toot.displayCard(75, 200, 2);
+toot.displayCard(150, 200, 2);
+toot.displayCard(225, 200, 2);
+toot.displayCard(75, 300, 2);
+toot.displayCard(150, 300, 2);
+toot.displayCard(225, 300, 2);
+
+
 
 redDeck.deal(8, Mac, Jude, Ezra, Laura);
 
