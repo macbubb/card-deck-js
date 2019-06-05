@@ -172,22 +172,10 @@ var Ezra = new Hand("Ezra");
 var Laura = new Hand("Laura");
 
 var toot = new Card(6, "Hearts");
-<<<<<<< HEAD
+
 toot.displayCard(75, 100, 2);
-toot.displayCard(150, 100, 2);
-toot.displayCard(225, 100, 2);
-toot.displayCard(75, 200, 2);
-toot.displayCard(150, 200, 2);
-toot.displayCard(225, 200, 2);
-toot.displayCard(75, 300, 2);
-toot.displayCard(150, 300, 2);
-toot.displayCard(225, 300, 2);
 
-=======
-//toot.displayCard(200, 100, 2);
-toot.drawDiamond(30, 30, 4);
->>>>>>> 51d5c6c27d882999d6e2882c79d1c5eaeb5634af
-
+toot.drawDiamond(50, 50, 6);
 
 redDeck.deal(8, Mac, Jude, Ezra, Laura);
 
